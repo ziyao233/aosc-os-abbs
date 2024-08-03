@@ -1,0 +1,6 @@
+PKGNAME=opendoas
+PKGSEC=admin
+PKGDEP="glibc linux-pam"
+PKGDES="A portable fork of the OpenBSD doas command."
+CHKUPDATE="anitya::id=205804"
+
