@@ -1,7 +1,7 @@
-From ceb55e4da592d0d491120f4a56a417b23db17b8b Mon Sep 17 00:00:00 2001
+From 1ab87565a96076e57612532dad0873c6006b6abe Mon Sep 17 00:00:00 2001
 From: Zhao Qunqin <zhaoqunqin@loongson.cn>
-Date: Mon, 30 Sep 2024 11:29:42 +0800
-Subject: [PATCH 083/136] FROMLIST: dt-bindings: EDAC for ls3a5000 memory
+Date: Fri, 18 Oct 2024 09:45:41 +0800
+Subject: [PATCH 083/138] FROMLIST: dt-bindings: EDAC for ls3a5000 memory
  controller
 
 add device tree bindings for ls3a5000 EDAC driver.
@@ -9,7 +9,7 @@ add device tree bindings for ls3a5000 EDAC driver.
 Signed-off-by: Zhao Qunqin <zhaoqunqin@loongson.cn>
 Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
 
-Link: https://lore.kernel.org/all/20240930032943.5182-2-zhaoqunqin@loongson.cn/
+Link: https://lore.kernel.org/all/20241018014542.27283-2-zhaoqunqin@loongson.cn/
 Signed-off-by: Kexy Biscuit <kexybiscuit@aosc.io>
 ---
  .../edac/loongson,ls3a5000-mc-edac.yaml       | 44 +++++++++++++++++++

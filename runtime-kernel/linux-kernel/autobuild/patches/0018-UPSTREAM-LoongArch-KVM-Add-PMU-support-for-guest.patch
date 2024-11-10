@@ -1,7 +1,7 @@
-From 0307a7c039a1b592c86d821e826bdcfdfa37fdf1 Mon Sep 17 00:00:00 2001
+From cdac4b76b3cee09dac1daadcfbb115a955f9446a Mon Sep 17 00:00:00 2001
 From: Song Gao <gaosong@loongson.cn>
 Date: Thu, 12 Sep 2024 20:53:40 +0800
-Subject: [PATCH 018/136] UPSTREAM: LoongArch: KVM: Add PMU support for guest
+Subject: [PATCH 018/138] UPSTREAM: LoongArch: KVM: Add PMU support for guest
 
 On LoongArch, the host and guest have their own PMU CSRs registers and
 they share PMU hardware resources. A set of PMU CSRs consists of a CTRL

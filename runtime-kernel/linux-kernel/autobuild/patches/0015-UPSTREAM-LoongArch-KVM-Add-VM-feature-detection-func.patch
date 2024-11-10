@@ -1,7 +1,7 @@
-From 8ecfb0ed873e7f63821a1e2cb851bef09f194eb3 Mon Sep 17 00:00:00 2001
+From d4ca9fa35e51173e1a506ec1ed94c8343cf41e2a Mon Sep 17 00:00:00 2001
 From: Bibo Mao <maobibo@loongson.cn>
 Date: Wed, 11 Sep 2024 23:26:32 +0800
-Subject: [PATCH 015/136] UPSTREAM: LoongArch: KVM: Add VM feature detection
+Subject: [PATCH 015/138] UPSTREAM: LoongArch: KVM: Add VM feature detection
  function
 
 Loongson SIMD Extension (LSX), Loongson Advanced SIMD Extension (LASX)

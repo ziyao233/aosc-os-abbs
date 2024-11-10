@@ -1,14 +1,14 @@
-From cb1bd7789867a75b02d1526df102970a2c1d1165 Mon Sep 17 00:00:00 2001
+From d83e558a1162c742cd5af0f45b8002c41bdf8f6c Mon Sep 17 00:00:00 2001
 From: Zhao Qunqin <zhaoqunqin@loongson.cn>
-Date: Mon, 30 Sep 2024 11:29:43 +0800
-Subject: [PATCH 084/136] FROMLIST: EDAC: Add EDAC driver for loongson memory
+Date: Fri, 18 Oct 2024 09:45:42 +0800
+Subject: [PATCH 084/138] FROMLIST: EDAC: Add EDAC driver for loongson memory
  controller
 
 Reports single bit errors (CE) only.
 
 Signed-off-by: Zhao Qunqin <zhaoqunqin@loongson.cn>
 
-Link: https://lore.kernel.org/all/20240930032943.5182-3-zhaoqunqin@loongson.cn/
+Link: https://lore.kernel.org/all/20241018014542.27283-3-zhaoqunqin@loongson.cn/
 Signed-off-by: Kexy Biscuit <kexybiscuit@aosc.io>
 ---
  MAINTAINERS                  |   1 +

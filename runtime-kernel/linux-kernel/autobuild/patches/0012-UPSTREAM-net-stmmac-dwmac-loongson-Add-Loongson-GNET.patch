@@ -1,7 +1,7 @@
-From 0523fdc1a05f7602537ddd8552b7c1a9082e253c Mon Sep 17 00:00:00 2001
+From 553fc8ee689b66af220c2dc83d1f2c786b951d35 Mon Sep 17 00:00:00 2001
 From: Yanteng Si <siyanteng@loongson.cn>
 Date: Wed, 7 Aug 2024 21:48:55 +0800
-Subject: [PATCH 012/136] UPSTREAM: net: stmmac: dwmac-loongson: Add Loongson
+Subject: [PATCH 012/138] UPSTREAM: net: stmmac: dwmac-loongson: Add Loongson
  GNET support
 
 The new generation Loongson LS2K2000 SoC and LS7A2000 chipset are
