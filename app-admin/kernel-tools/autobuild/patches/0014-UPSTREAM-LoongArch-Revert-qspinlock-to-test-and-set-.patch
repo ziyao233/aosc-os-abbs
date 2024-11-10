@@ -1,7 +1,7 @@
-From 025350973de15a7fc9a80fb3a2c94a7f922645e3 Mon Sep 17 00:00:00 2001
+From 4128c10700ddcfee6d9f343f50b37ad79691db4e Mon Sep 17 00:00:00 2001
 From: Bibo Mao <maobibo@loongson.cn>
 Date: Wed, 11 Sep 2024 23:26:32 +0800
-Subject: [PATCH 014/136] UPSTREAM: LoongArch: Revert qspinlock to test-and-set
+Subject: [PATCH 014/138] UPSTREAM: LoongArch: Revert qspinlock to test-and-set
  simple lock on VM
 
 Similar with x86, when VM is detected, revert to a simple test-and-set
@@ -152,10 +152,10 @@ index 9c9b75b76f62..32537e9b1708 100644
 +	return 0;
 +}
 diff --git a/arch/loongarch/kernel/setup.c b/arch/loongarch/kernel/setup.c
-index 0f0740f0be27..00e307203ddb 100644
+index d2b18ed23b8a..cbd3c09a93c1 100644
 --- a/arch/loongarch/kernel/setup.c
 +++ b/arch/loongarch/kernel/setup.c
-@@ -603,6 +603,8 @@ void __init setup_arch(char **cmdline_p)
+@@ -604,6 +604,8 @@ void __init setup_arch(char **cmdline_p)
  	arch_mem_init(cmdline_p);
  
  	resource_init();

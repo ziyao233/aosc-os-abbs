@@ -1,7 +1,7 @@
-From d8fa5c6421c4f8e54b5de1303cd7ad1ef9ea4eb1 Mon Sep 17 00:00:00 2001
+From 9c2e109bce8efe47d71d757cca88174172d7bb3f Mon Sep 17 00:00:00 2001
 From: Bibo Mao <maobibo@loongson.cn>
 Date: Wed, 11 Sep 2024 23:26:32 +0800
-Subject: [PATCH 017/136] UPSTREAM: LoongArch: KVM: Add vm migration support
+Subject: [PATCH 017/138] UPSTREAM: LoongArch: KVM: Add vm migration support
  for LBT registers
 
 Every vcpu has separate LBT registers. And there are four scr registers,

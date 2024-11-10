@@ -1,7 +1,7 @@
-From 2972edf03c4abe5c560473c0c832fd7f41ec1262 Mon Sep 17 00:00:00 2001
+From 8c65e171d9ceaffdedd3d06e99a7bf1e1870f8e8 Mon Sep 17 00:00:00 2001
 From: Yanteng Si <siyanteng@loongson.cn>
 Date: Wed, 7 Aug 2024 21:47:09 +0800
-Subject: [PATCH 006/136] UPSTREAM: net: stmmac: dwmac-loongson: Use
+Subject: [PATCH 006/138] UPSTREAM: net: stmmac: dwmac-loongson: Use
  PCI_DEVICE_DATA() macro for device identification
 
 For the readability sake convert the hard-coded Loongson GMAC PCI ID to

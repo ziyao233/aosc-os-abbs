@@ -1,7 +1,7 @@
-From 05619edd5f0f86df22a3f5cc4b2575526eccdbae Mon Sep 17 00:00:00 2001
+From 14c0312c0c972b55fb0042761585bccc681c5474 Mon Sep 17 00:00:00 2001
 From: Mingcong Bai <jeffbai@aosc.io>
 Date: Tue, 15 Oct 2024 20:32:21 +0800
-Subject: [PATCH 133/136] AOSCOS: Revert "rcu: Fix rcu_barrier() VS post
+Subject: [PATCH 133/138] AOSCOS: Revert "rcu: Fix rcu_barrier() VS post
  CPUHP_TEARDOWN_CPU invocation"
 
 When this change was introduced between v6.10.4 and v6.10.5, the Broadcom
@@ -99,10 +99,10 @@ Signed-off-by: Kexy Biscuit <kexybiscuit@aosc.io>
  1 file changed, 3 insertions(+), 7 deletions(-)
 
 diff --git a/kernel/rcu/tree.c b/kernel/rcu/tree.c
-index e641cc681901..6f549dd62b4b 100644
+index 8af1354b2231..3be2f6e85ffd 100644
 --- a/kernel/rcu/tree.c
 +++ b/kernel/rcu/tree.c
-@@ -5148,15 +5148,11 @@ void rcutree_migrate_callbacks(int cpu)
+@@ -5242,15 +5242,11 @@ void rcutree_migrate_callbacks(int cpu)
  	struct rcu_data *rdp = per_cpu_ptr(&rcu_data, cpu);
  	bool needwake;
  

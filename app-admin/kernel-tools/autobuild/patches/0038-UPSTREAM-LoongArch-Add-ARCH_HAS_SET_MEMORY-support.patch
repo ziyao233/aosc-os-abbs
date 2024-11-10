@@ -1,7 +1,7 @@
-From e64d54f3ca663a517a126412fc270fd5ab906e05 Mon Sep 17 00:00:00 2001
+From 8d8c13e3f0734a2fb9c6e23b9b3041b5ffe3c465 Mon Sep 17 00:00:00 2001
 From: Huacai Chen <chenhuacai@loongson.cn>
 Date: Tue, 24 Sep 2024 15:32:20 +0800
-Subject: [PATCH 038/136] UPSTREAM: LoongArch: Add ARCH_HAS_SET_MEMORY support
+Subject: [PATCH 038/138] UPSTREAM: LoongArch: Add ARCH_HAS_SET_MEMORY support
 
 Add set_memory_ro/rw/x/nx architecture hooks to change the page
 attribution.

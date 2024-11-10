@@ -1,7 +1,7 @@
-From a8412b2dc4f5c8f2c77aeb90b37aca5fbba69f31 Mon Sep 17 00:00:00 2001
+From 32307646907c66a1a9ff35c304c7ea1d4328e84c Mon Sep 17 00:00:00 2001
 From: Huacai Chen <chenhuacai@loongson.cn>
 Date: Tue, 24 Sep 2024 15:32:20 +0800
-Subject: [PATCH 039/136] UPSTREAM: LoongArch: Add ARCH_HAS_SET_DIRECT_MAP
+Subject: [PATCH 039/138] UPSTREAM: LoongArch: Add ARCH_HAS_SET_DIRECT_MAP
  support
 
 Add set_direct_map_*() functions for setting the direct map alias for

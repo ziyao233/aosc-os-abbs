@@ -1,7 +1,7 @@
-From ebdb5e55c7e3f34de6371e3e6de0a8ab5f69a0b0 Mon Sep 17 00:00:00 2001
+From 9be73d4128a8bc55727dc478d43c05e7c717982d Mon Sep 17 00:00:00 2001
 From: Tiezhu Yang <yangtiezhu@loongson.cn>
 Date: Tue, 17 Sep 2024 22:23:09 +0800
-Subject: [PATCH 033/136] UPSTREAM: LoongArch: Set AS_HAS_THIN_ADD_SUB as y if
+Subject: [PATCH 033/138] UPSTREAM: LoongArch: Set AS_HAS_THIN_ADD_SUB as y if
  AS_IS_LLVM
 
 When building kernel with "make CC=clang defconfig", LLVM Assembler is

@@ -1,7 +1,7 @@
-From 824081ce89b55b2fa74a684b48ed5756b6e116de Mon Sep 17 00:00:00 2001
+From df3f9e88b8d79e6c2b0a1abc88fc15b83d748156 Mon Sep 17 00:00:00 2001
 From: Yanteng Si <siyanteng@loongson.cn>
 Date: Wed, 7 Aug 2024 21:45:28 +0800
-Subject: [PATCH 001/136] UPSTREAM: net: stmmac: Move the atds flag to the
+Subject: [PATCH 001/138] UPSTREAM: net: stmmac: Move the atds flag to the
  stmmac_dma_cfg structure
 
 ATDS (Alternate Descriptor Size) is a part of the DMA Bus Mode configs
@@ -89,7 +89,7 @@ index b402fb54f613..82957db47c99 100644
  	/* Enable Application Access by writing to DMA CSR0 */
  	writel(DMA_BUS_MODE_DEFAULT | (dma_cfg->pbl << DMA_BUS_MODE_PBL_SHIFT),
 diff --git a/drivers/net/ethernet/stmicro/stmmac/dwmac4_dma.c b/drivers/net/ethernet/stmicro/stmmac/dwmac4_dma.c
-index 84d3a8551b03..e0165358c4ac 100644
+index 071f128aa490..77b35abc6f6f 100644
 --- a/drivers/net/ethernet/stmicro/stmmac/dwmac4_dma.c
 +++ b/drivers/net/ethernet/stmicro/stmmac/dwmac4_dma.c
 @@ -153,7 +153,7 @@ static void dwmac410_dma_init_channel(struct stmmac_priv *priv,
@@ -129,7 +129,7 @@ index e53c32362774..1c99c99f4627 100644
  			  struct stmmac_dma_cfg *dma_cfg, u32 chan);
  	void (*init_rx_chan)(struct stmmac_priv *priv, void __iomem *ioaddr,
 diff --git a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
-index f3a1b179aaea..9f1286835550 100644
+index 02368917efb4..cb0984ca53c2 100644
 --- a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
 +++ b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
 @@ -3003,7 +3003,6 @@ static int stmmac_init_dma_engine(struct stmmac_priv *priv)

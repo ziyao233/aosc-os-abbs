@@ -1,7 +1,7 @@
-From 75a67da700ae2c22ec269ebc04579bd434c39c9c Mon Sep 17 00:00:00 2001
+From 52644025fc0e2ecd4d6d3a98d4400c3371be00b1 Mon Sep 17 00:00:00 2001
 From: Huacai Chen <chenhuacai@loongson.cn>
 Date: Fri, 23 Aug 2024 18:39:33 +0800
-Subject: [PATCH 027/136] UPSTREAM: LoongArch: Architectural preparation for
+Subject: [PATCH 027/138] UPSTREAM: LoongArch: Architectural preparation for
  AVEC irqchip
 
 Add architectural preparation for AVEC irqchip, including:
