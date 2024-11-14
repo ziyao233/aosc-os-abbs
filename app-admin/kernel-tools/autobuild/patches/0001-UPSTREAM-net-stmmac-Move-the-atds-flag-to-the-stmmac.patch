@@ -1,7 +1,7 @@
-From df3f9e88b8d79e6c2b0a1abc88fc15b83d748156 Mon Sep 17 00:00:00 2001
+From 76e2687b779f5ebbb85208f3c6d4ac017032483e Mon Sep 17 00:00:00 2001
 From: Yanteng Si <siyanteng@loongson.cn>
 Date: Wed, 7 Aug 2024 21:45:28 +0800
-Subject: [PATCH 001/138] UPSTREAM: net: stmmac: Move the atds flag to the
+Subject: [PATCH 001/137] UPSTREAM: net: stmmac: Move the atds flag to the
  stmmac_dma_cfg structure
 
 ATDS (Alternate Descriptor Size) is a part of the DMA Bus Mode configs
@@ -129,7 +129,7 @@ index e53c32362774..1c99c99f4627 100644
  			  struct stmmac_dma_cfg *dma_cfg, u32 chan);
  	void (*init_rx_chan)(struct stmmac_priv *priv, void __iomem *ioaddr,
 diff --git a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
-index 02368917efb4..cb0984ca53c2 100644
+index afb8a5a079fa..30be8a77de17 100644
 --- a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
 +++ b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
 @@ -3003,7 +3003,6 @@ static int stmmac_init_dma_engine(struct stmmac_priv *priv)

@@ -1,7 +1,7 @@
-From 2dfee3ca7bc649ed761a7588e43fab77d09593ab Mon Sep 17 00:00:00 2001
+From 92b87b44f271e22cd4e7fcc1e2fd57f4bdf377b8 Mon Sep 17 00:00:00 2001
 From: Yanteng Si <siyanteng@loongson.cn>
 Date: Wed, 7 Aug 2024 21:45:29 +0800
-Subject: [PATCH 002/138] UPSTREAM: net: stmmac: Add multi-channel support
+Subject: [PATCH 002/137] UPSTREAM: net: stmmac: Add multi-channel support
 
 DW GMAC v3.73 can be equipped with the Audio Video (AV) feature which
 enables transmission of time-sensitive traffic over bridged local area
@@ -311,7 +311,7 @@ index 1c99c99f4627..7e90f34b8c88 100644
  			       u32 chan, bool rx, bool tx);
  	void (*disable_dma_irq)(struct stmmac_priv *priv, void __iomem *ioaddr,
 diff --git a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
-index cb0984ca53c2..a7b0e64676b7 100644
+index 30be8a77de17..88b3179dac9f 100644
 --- a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
 +++ b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
 @@ -2367,9 +2367,11 @@ static void stmmac_dma_operation_mode(struct stmmac_priv *priv)
@@ -338,7 +338,7 @@ index cb0984ca53c2..a7b0e64676b7 100644
  
  		xsk_tx_metadata_to_compl(meta,
  					 &tx_q->tx_skbuff_dma[entry].xsk_meta);
-@@ -4765,7 +4767,7 @@ static netdev_tx_t stmmac_xmit(struct sk_buff *skb, struct net_device *dev)
+@@ -4766,7 +4768,7 @@ static netdev_tx_t stmmac_xmit(struct sk_buff *skb, struct net_device *dev)
  
  	netdev_tx_sent_queue(netdev_get_tx_queue(dev, queue), skb->len);
  
@@ -347,7 +347,7 @@ index cb0984ca53c2..a7b0e64676b7 100644
  
  	stmmac_flush_tx_descriptors(priv, queue);
  	stmmac_tx_timer_arm(priv, queue);
-@@ -4992,7 +4994,7 @@ static int stmmac_xdp_xmit_xdpf(struct stmmac_priv *priv, int queue,
+@@ -4993,7 +4995,7 @@ static int stmmac_xdp_xmit_xdpf(struct stmmac_priv *priv, int queue,
  		u64_stats_update_end(&txq_stats->q_syncp);
  	}
  
