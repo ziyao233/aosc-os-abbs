@@ -1,7 +1,7 @@
-VER=0.9.3
+VER=0.9.4
 SRCS="git::commit=tags/v$VER;copy-repo=true::https://github.com/AOSC-Dev/deploykit-gui.git \
       tbl::https://github.com/AOSC-Dev/deploykit-gui/releases/download/v$VER/dist.tar.xz"
 CHKSUMS="SKIP \
-         sha256::2c2a4c91bb4b420ead14b3aea386fad205f1ccbe326d6807c260922308626c14"
+         sha256::392020e462307941782743e111d2ebd2361b16210e96104c629b3fadf6c61088"
 SUBDIR="deploykit-gui/src-tauri"
 CHKUPDATE="anitya::id=371971"
