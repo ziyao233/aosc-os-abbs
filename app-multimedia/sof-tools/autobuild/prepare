@@ -1,2 +1,2 @@
 abinfo "Symlinking license file"
-ln -vs ../LICENCE ./
+ln -vs ../LICENCE "$SRCDIR"/
