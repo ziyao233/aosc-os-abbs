@@ -1,4 +1,4 @@
-VER=2.24.0
-SRCS="tbl::https://github.com/redhat-performance/tuned/archive/refs/tags/v$VER.tar.gz"
-CHKSUMS="sha256::0f4a72c89772deb8a4e572df70ee3967ba33c1351096a6e87d67674f72830e0e"
+VER=2.24.1
+SRCS="git::commit=tags/v$VER::https://github.com/redhat-performance/tuned.git"
+CHKSUMS="SKIP"
 CHKUPDATE="anitya::id=11277"
