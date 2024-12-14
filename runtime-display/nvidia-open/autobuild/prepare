@@ -1,5 +1,5 @@
 abinfo "Replacing placeholders in dkms.conf ..."
-sed -i "s/__VERSION_STRING/${PKGVER}/" "$SRCDIR"/nvidia-driver/kernel-open/dkms.conf
+sed -i "s/__VERSION_STRING/${PKGVER%%+*}/" "$SRCDIR"/nvidia-driver/kernel-open/dkms.conf
 # shellcheck disable=SC2016
 sed -i 's/__JOBS/`nproc`/' "$SRCDIR"/nvidia-driver/kernel-open/dkms.conf
 sed -i 's/__EXCLUDE_MODULES//' "$SRCDIR"/nvidia-driver/kernel-open/dkms.conf
@@ -25,5 +25,5 @@ mv -vf "$SRCDIR"/nvidia-driver/kernel-open/dkms.conf "$SRCDIR"/nvidia-driver/dkm
 
 abinfo "Generating postinst and prerm"
 for i in postinst prerm; do
-	sed -e "s/@DRV_VER@/${PKGVER}/g" "$SRCDIR"/autobuild/${i}.in > "$SRCDIR"/autobuild/${i}
+	sed -e "s/@DRV_VER@/${PKGVER%%+*}/g" "$SRCDIR"/autobuild/${i}.in > "$SRCDIR"/autobuild/${i}
 done

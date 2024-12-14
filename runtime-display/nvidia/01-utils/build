@@ -46,7 +46,7 @@ sanity_check() {
     # The regex glob matching so that should not be installed, due to
     #  - Incompatibility with with GLVND, or
     #  - A separate package containing this so.
-    BLACKLIST="(EGL|GL|GLESv1_CM|GLESv2|GLX|OpenGL|OpenCL|GLdispatch|nvidia-egl-wayland).so."
+    BLACKLIST="(EGL|GL|GLESv1_CM|GLESv2|GLX|OpenGL|OpenCL|GLdispatch|nvidia-egl-wayland|libnvidia-gtk3|libnvidia-wayland-client).so."
     # Assuming pwd is in NVIDIA-Linux-${NV_ARCH}
     abinfo "Checking whether all the .so provided has been installed"
     _PROVIDED=$(find -maxdepth 1 -name "*.so.*" -exec basename {} \; | sort | sed -E "/${BLACKLIST}/d")
@@ -71,48 +71,7 @@ case "$ABHOST" in
         abdie "Unsupported architecture"
 esac
 
-
-cd "$SRCDIR"/NVIDIA-Linux-${NV_ARCH}-${PKGVER}
-
-if [[ -d "${SRCDIR}/autobuild/patches" ]]; then
-    abinfo "Patching kernel driver"
-    for i in $(find "${SRCDIR}/autobuild/patches/" -type f -name "*.patch" | sort); do
-        abinfo "Applying $(basename $i)"
-        (
-            cd kernel
-            patch -Np1 -i "$i"
-        )
-    done
-else
-    abinfo "No kernel patches needed"
-fi
-
-cd kernel
-
-abinfo "Processing DKMS configuration file..."
-sed -i "s/__VERSION_STRING/$PKGVER/" dkms.conf
-sed -i 's/__JOBS/`nproc`/' dkms.conf
-sed -i 's/__DKMS_MODULES//' dkms.conf
-sed -i '$iBUILT_MODULE_NAME[0]="nvidia"\
-DEST_MODULE_LOCATION[0]="/kernel/drivers/video"\
-BUILT_MODULE_NAME[1]="nvidia-uvm"\
-DEST_MODULE_LOCATION[1]="/kernel/drivers/video"\
-BUILT_MODULE_NAME[2]="nvidia-modeset"\
-DEST_MODULE_LOCATION[2]="/kernel/drivers/video"\
-BUILT_MODULE_NAME[3]="nvidia-drm"\
-DEST_MODULE_LOCATION[3]="/kernel/drivers/video"\
-BUILT_MODULE_NAME[4]="nvidia-peermem"\
-DEST_MODULE_LOCATION[4]="/kernel/drivers/video"' dkms.conf
-
-cd ..
-
-abinfo "NVIDIA blacklist for Nouveau..."
-install -dm 755 "$PKGDIR"/usr/{lib/modprobe.d,src}
-cp -dr --no-preserve='ownership' kernel "$PKGDIR"/usr/src/nvidia-$PKGVER
-echo 'blacklist nouveau' > "$PKGDIR"/usr/lib/modprobe.d/nvidia.conf
-
-abinfo "NVIDIA Persistenced..."
-tar xf nvidia-persistenced-init.tar.bz2
+pushd "$SRCDIR"/NVIDIA-Linux-${NV_ARCH}-${PKGVER}
 
 abinfo "Processing and installing OpenCL runtime..."
 install_for_all 644 nvidia.icd "$PKGDIR"/etc/OpenCL/vendors
@@ -182,7 +141,8 @@ install_for_all 755 "libnvidia-api.so.1" "$PKGDIR"/usr/lib
 
 abinfo "Wayland support libraries and platform files..."
 install_for_all 755 "libnvidia-egl-gbm.so.1.1.2" "$PKGDIR"/usr/lib
-install_if_amd64 755 "libnvidia-wayland-client.so.$PKGVER" "$PKGDIR"/usr/lib
+# libnvidia-wayland-client.so is open-source
+
 install -Dvm644 "15_nvidia_gbm.json" \
     "$PKGDIR"/usr/share/egl/egl_external_platform.d/15_nvidia_gbm.json
 mkdir -vp "$PKGDIR/usr/lib/gbm"
@@ -240,12 +200,6 @@ abinfo "Debug and core dump utility..."
 install -Dvm755 nvidia-debugdump \
     "$PKGDIR"/usr/bin/nvidia-debugdump
 
-abinfo "NVIDIA X configurator..."
-install -Dvm755 nvidia-xconfig \
-    "$PKGDIR"/usr/bin/nvidia-xconfig
-install -Dvm644 nvidia-xconfig.1.gz \
-    "$PKGDIR"/usr/share/man/man1/nvidia-xconfig.1.gz
-
 abinfo "NVIDIA Bug Reporter..."
 install -Dvm755 nvidia-bug-report.sh \
     "$PKGDIR"/usr/bin/nvidia-bug-report
@@ -270,17 +224,6 @@ install -Dvm4755 nvidia-modprobe \
 install -Dvm644 nvidia-modprobe.1.gz \
     "$PKGDIR"/usr/share/man/man1/nvidia-modprobe.1.gz
 
-abinfo "NVIDIA Persistence Daemon..."
-install -Dvm755 nvidia-persistenced \
-    "$PKGDIR"/usr/bin/nvidia-persistenced
-install -Dvm644 nvidia-persistenced.1.gz \
-    "$PKGDIR"/usr/share/man/man1/nvidia-persistenced.1.gz
-install -Dvm644 \
-    nvidia-persistenced-init/systemd/nvidia-persistenced.service.template \
-    "$PKGDIR"/usr/lib/systemd/system/nvidia-persistenced.service
-sed -e 's/__USER__/nvidia-persistenced/' \
-    -i "$PKGDIR"/usr/lib/systemd/system/nvidia-persistenced.service
-
 abinfo "Application profiles..."
 install -Dvm644 nvidia-application-profiles-$PKGVER-rc \
     "$PKGDIR"/usr/share/nvidia/nvidia-application-profiles-$PKGVER-rc
@@ -288,11 +231,7 @@ install -Dvm644 nvidia-application-profiles-$PKGVER-key-documentation \
     "$PKGDIR"/usr/share/nvidia/nvidia-application-profiles-$PKGVER-key-documentation
 
 abinfo "NVIDIA Control Panel..."
-install_for_all 755 nvidia-settings "$PKGDIR"/usr/bin
-install_for_all 644 nvidia-settings.1.gz "$PKGDIR"/usr/share/man/man1
-install_for_all 644 nvidia-settings.png "$PKGDIR"/usr/share/pixmaps
 install_for_all 755 libnvidia-gtk2.so.$PKGVER "$PKGDIR"/usr/lib
-install_for_all 755 libnvidia-gtk3.so.$PKGVER "$PKGDIR"/usr/lib
 
 abinfo "Power management services"
 for i in suspend hibernate resume; do
@@ -304,10 +243,6 @@ install_for_all 755 systemd/nvidia-sleep.sh "$PKGDIR"/usr/bin
 install_for_all 755 nvidia-powerd "${PKGDIR}/usr/bin"
 install_for_all 644 nvidia-dbus.conf "${PKGDIR}/usr/share/dbus-1/system.d"
 install_for_all 644 systemd/system/nvidia-powerd.service "$PKGDIR"/usr/lib/systemd/system
-
-abinfo "Card Firmware"
-install_for_all 644 firmware/gsp_ga10x.bin "${PKGDIR}"/usr/lib/firmware/nvidia/${PKGVER}
-install_for_all 644 firmware/gsp_tu10x.bin "${PKGDIR}"/usr/lib/firmware/nvidia/${PKGVER}
 
 if ((NEED_FIX)); then
     aberr "Additional files should be installed. See errors above."
@@ -327,14 +262,10 @@ ln -sv "libglxserver_nvidia.so.$PKGVER" \
 
 abinfo "License and help texts"
 for i in README.txt LICENSE NVIDIA_Changelog; do
-    install -Dvm644 $i "$PKGDIR"/usr/share/doc/nvidia/$i
+    install -Dvm644 $i "$PKGDIR"/usr/share/doc/nvidia-utils/$i
 done
 
-cd "$SRCDIR"
-
-abinfo "Installing XNVCtrl headers ..."
-install -Dvm644 "$SRCDIR"/nvidia-settings-*/src/libXNVCtrl/*.h \
-    -t "$PKGDIR"/usr/include/NVCtrl
+popd
 
 if [[ $NV_ARCH == "x86_64" ]]; then
     abinfo "Installing optenv32 libraries"

@@ -63,9 +63,3 @@ install -Dvm755 "libnvidia-glvkspirv.so.$PKGVER" \
 sanity_check "${PKGDIR}/opt/32"
 
 create_links
-
-cd ..
-
-abinfo "Installing XNVCtrl headers ..."
-install -Dvm644 "$SRCDIR"/nvidia-settings-*/src/libXNVCtrl/*.h \
-    -t "$PKGDIR"/opt/32/include/NVCtrl

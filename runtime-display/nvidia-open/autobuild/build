@@ -1,7 +1,7 @@
 pushd "$SRCDIR"/nvidia-driver
 abinfo "Installing kernel module sources ..."
 mkdir -vp "${PKGDIR}/usr/src"
-cp -drv --no-preserve='ownership' "$SRCDIR"/nvidia-driver "${PKGDIR}/usr/src/nvidia-$PKGVER"
+cp -drv --no-preserve='ownership' "$SRCDIR"/nvidia-driver "${PKGDIR}/usr/src/nvidia-${PKGVER%%+*}"
 popd
 
 pushd "$SRCDIR"/nvidia-settings
@@ -17,6 +17,9 @@ make -C src install \
 make -C doc install \
     DESTDIR="$PKGDIR" \
     PREFIX=/usr
+
+abinfo "Installing XNVCtrl headers ..."
+install -Dvm644 src/libXNVCtrl/*.h -t "$PKGDIR"/usr/include/NVCtrl
 popd
 
 pushd "$SRCDIR"/nvidia-xconfig

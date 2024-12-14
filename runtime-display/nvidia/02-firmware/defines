@@ -1,0 +1,9 @@
+PKGNAME=nvidia-firmware
+PKGSEC=x11
+PKGDES="The proprietary GPS firmwares for NVIDIA cards"
+
+PKGCONFL="nvidia<=565.77"
+PKGBREAK="nvidia<=565.77"
+ABSTRIP=0
+
+FAIL_ARCH="!(amd64|arm64)"
