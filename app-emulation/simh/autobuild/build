@@ -8,7 +8,7 @@ make \
 abinfo "Installing SimH ..."
 for i in "$SRCDIR"/BIN/*; do
     install -Dvm755 $i \
-        "$PKGDIR/usr/bin/simh-$i"
+        "$PKGDIR/usr/bin/simh-$(basename "$i")"
 done
 
 abinfo "Installing VAX binaries ..."
