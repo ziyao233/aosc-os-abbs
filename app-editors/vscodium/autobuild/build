@@ -8,7 +8,9 @@ abinfo "Getting vscode repo ..."
 abinfo "Setting build var ..."
 export SKIP_LINUX_PACKAGES="True"
 export SHOULD_BUILD=yes
-export CI_BUILD=no
+export SHOULD_BUILD_REH=no
+export SHOULD_BUILD_REH_WEB=no
+export CI_BUILD=yes
 export OS_NAME=linux
 export RELEASE_VERSION="$PKGVER"
 export DISABLE_UPDATE=yes
@@ -17,12 +19,31 @@ if [[ "${CROSS:-$ARCH}" = "amd64" ]]; then
   export VSCODE_ARCH="x64"
 elif [[ "${CROSS:-$ARCH}" = "arm64" ]]; then
   export VSCODE_ARCH="arm64"
+elif [[ "${CROSS:-$ARCH}" = "loongarch64" ]]; then
+  export VSCODE_ARCH="loong64"
+elif [[ "${CROSS:-$ARCH}" = "ppc64el" ]]; then
+  export VSCODE_ARCH="ppc64le"
+elif [[ "${CROSS:-$ARCH}" = "riscv64" ]]; then
+  export VSCODE_ARCH="riscv64"
 else
   aberr "Platform not supported" && exit 1
 fi
 
-abinfo "Building .."
+abinfo "Building ..."
 "$SRCDIR"/build.sh
+
+# Temporarily fix a library bug that causes electron downloading failure, PR: https://github.com/microsoft/vscode-gulp-electron/pull/20
+pushd "$SRCDIR"/vscode
+jq '.devDependencies."@vscode/gulp-electron" = "git+https://github.com/darkyzhou/vscode-gulp-electron.git#94825f69fa68bb0affece10657106f3ac930ddac"' package.json > package.json.tmp
+mv package.json.tmp package.json
+npm i
+popd
+
+# Cheat the extraction logic in package_linux_bin.sh
+tar -czf "$SRCDIR"/vscode.tar.gz -T /dev/null
+
+abinfo "Packaging ..."
+"$SRCDIR"/package_linux_bin.sh
 
 abinfo "Switching to SRCDIR ..."
 cd "$SRCDIR"
