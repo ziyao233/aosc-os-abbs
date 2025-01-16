@@ -9,7 +9,9 @@ BUILDDEP="rustc llvm"
 # FIXME: Limited by wasmtime support.
 #
 # See https://wasmtime.dev/install.sh for architecture support.
-FAIL_ARCH="!(amd64|arm64|riscv64)"
+#
+# riscv64: zed Livekit only support amd64 and arm64
+FAIL_ARCH="!(amd64|arm64)"
 
 USECLANG=1
 
