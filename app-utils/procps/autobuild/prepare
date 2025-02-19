@@ -1,0 +1,1 @@
+echo "$PKGVER" > "$SRCDIR/.tarball-version"
